@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etiqueta Shopee — 10×15cm</title>
+<!--
+  COMO USAR:
+  1. Abra no Chrome / Edge (sem internet necessária)
+  2. Arraste ou selecione o arquivo .txt da Shopee
+  3. Ajuste os controles até a prévia ficar correta
+  4. Clique em "Imprimir 10×15cm"
+     › Papel: 10×15cm | Margens: Nenhuma | Escala: 100%
+-->
+<style>
+:root{--S:#ee4d2d;--Sd:#c73d20;--bg:#f2f2f2;--card:#fff;--r:10px;--muted:#777;
+      --E:#FFD028;--Eb:#111;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,sans-serif;background:var(--bg);padding:0 0 24px;}
+.wrap{max-width:1020px;margin:0 auto;padding:0 14px;}
+
+/* ── Barra de marca Eleva ──────────────────────────── */
+.eleva-bar{
+  background:var(--Eb);
+  padding:0 20px;
+  margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;
+}
+.eleva-brand{display:flex;align-items:center;gap:12px;padding:14px 0;}
+.eleva-icon{width:38px;height:38px;flex-shrink:0;}
+.eleva-text{display:flex;flex-direction:column;line-height:1.1;}
+.eleva-name{color:#fff;font-size:1.1rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+.eleva-tagline{color:var(--E);font-size:.65rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
+.eleva-tool{color:rgba(255,255,255,.45);font-size:.75rem;text-align:right;}
+
+.card{background:var(--card);border-radius:var(--r);padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.09);}
+
+/* Header (dentro do wrap) */
+h1{display:flex;align-items:center;gap:9px;font-size:1.3rem;color:var(--S);margin-bottom:3px;}
+.badge{background:var(--S);color:#fff;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:20px;}
+.sub{color:var(--muted);font-size:.85rem;margin-bottom:18px;}
+
+/* Upload */
+.drop{border:2px dashed #ccc;border-radius:var(--r);padding:32px;text-align:center;cursor:pointer;transition:.18s;}
+.drop:hover,.drop.over{border-color:var(--S);background:#fff8f7;}
+#fi{display:none;}
+.drop-ic{font-size:2.2rem;margin-bottom:6px;}
+.drop-t{font-weight:600;margin-bottom:3px;}
+.drop-h{color:var(--muted);font-size:.83rem;}
+
+/* Status */
+#st{margin-top:9px;font-size:.86rem;font-style:italic;min-height:1.1em;color:var(--S);}
+#st.err{color:#d32f2f;}
+
+/* Controls */
+.ctrl-grid{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:flex-end;}
+.cg{display:flex;flex-direction:column;gap:3px;}
+.cg>label{font-size:.82rem;font-weight:700;color:#444;}
+.sr{display:flex;align-items:center;gap:7px;}
+input[type=range]{accent-color:var(--S);}
+.sv{font-weight:700;color:var(--S);min-width:36px;font-size:.9rem;}
+.hn{font-size:.72rem;color:var(--muted);}
+.ck{display:flex;align-items:center;gap:5px;font-size:.84rem;cursor:pointer;padding:2px 0;}
+input[type=checkbox]{accent-color:var(--S);width:14px;height:14px;}
+
+/* Radio group */
+.rg{display:flex;gap:10px;align-items:center;}
+.rg label{display:flex;align-items:center;gap:4px;font-size:.84rem;cursor:pointer;}
+input[type=radio]{accent-color:var(--S);}
+
+/* Buttons */
+.btn{background:var(--S);color:#fff;border:none;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:.15s;}
+.btn:hover{background:var(--Sd);}
+.btn-sm{background:#f5f5f5;color:#333;border:1px solid #ccc;padding:6px 13px;border-radius:7px;cursor:pointer;font-size:.8rem;transition:.15s;}
+.btn-sm:hover{background:#eee;}
+
+/* Separator */
+.ctrl-sep{height:1px;background:#eee;margin:6px 0;}
+
+/* Preview */
+.pv-wrap{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start;}
+.lbl-frame{display:inline-block;border:2.5px solid var(--S);border-radius:6px;overflow:hidden;background:#fff;}
+.sec-t{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;}
+.sep-info{font-size:.74rem;color:var(--muted);text-align:center;margin-top:4px;}
+.origs{flex:1;min-width:180px;}
+.origs canvas{max-width:100%;border:1px solid #ddd;display:block;border-radius:4px;margin-bottom:10px;}
+.cnt-badge{background:#eef9ee;border:1px solid #b2d8b2;color:#2e7d32;padding:5px 13px;border-radius:20px;font-size:.82rem;font-weight:600;display:inline-block;margin-bottom:12px;}
+.lbl-block{margin-bottom:26px;}
+.lbl-num{font-weight:700;color:var(--muted);font-size:.77rem;text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;}
+.sp{display:inline-block;width:13px;height:13px;border:2px solid var(--S);border-top-color:transparent;border-radius:50%;animation:spin .55s linear infinite;vertical-align:middle;margin-right:5px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Section divider inside controls */
+.divider{color:var(--muted);font-size:.8rem;font-weight:700;border-bottom:1px solid #eee;padding-bottom:4px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px;}
+
+/* Print */
+#pc{display:none;}
+@media print{
+  @page{size:10cm 15cm;margin:0;}
+  body{margin:0;padding:0;background:#fff;}
+  .no-print,.eleva-bar{display:none!important;}
+  #pc{display:block!important;}
+  .pl{width:10cm;height:15cm;overflow:hidden;page-break-after:always;page-break-inside:avoid;}
+  .pl:last-child{page-break-after:avoid;}
+  .pl img{width:10cm;height:15cm;display:block;}
+}
+</style>
+</head>
+<body>
+<!-- ══ BARRA ELEVA ══ -->
+<div class="eleva-bar no-print">
+  <div class="eleva-brand">
+    <!-- Logo Eleva Commerce — ícone trending arrow SVG -->
+    <svg class="eleva-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="14" fill="#1a1a1a"/>
+      <!-- Seta trending up — fiel ao logo original -->
+      <polyline
+        points="14,78  36,54  50,66  82,22"
+        stroke="#FFD028" stroke-width="9"
+        stroke-linecap="round" stroke-linejoin="round"
+        fill="none"/>
+      <!-- Ponta da seta -->
+      <polyline
+        points="60,16  82,22  76,44"
+        stroke="#FFD028" stroke-width="9"
+        stroke-linecap="round" stroke-linejoin="round"
+        fill="none"/>
+    </svg>
+    <div class="eleva-text">
+      <span class="eleva-name">Eleva Commerce</span>
+      <span class="eleva-tagline">Gestão de Marketplaces</span>
+    </div>
+  </div>
+  <div class="eleva-tool">Conversor de Etiqueta<br>Shopee → 10×15cm</div>
+</div>
+
+<div class="wrap no-print">
+
+  <h1>🏷️ Etiqueta Shopee <span class="badge">10×15cm</span></h1>
+  <p class="sub">Converte o .txt ZPL da Shopee em etiqueta única 10×15cm — sem internet, sem instalação</p>
+
+  <!-- Upload -->
+  <div class="card">
+    <div class="drop" id="dz">
+      <input type="file" id="fi" accept=".txt">
+      <div class="drop-ic">📂</div>
+      <div class="drop-t">Arraste o arquivo .txt da Shopee aqui</div>
+      <div class="drop-h">ou clique para selecionar · suporta múltiplas etiquetas</div>
+    </div>
+    <div id="st"></div>
+  </div>
+
+  <!-- Controles -->
+  <div class="card" id="cc" style="display:none">
+    <div class="ctrl-grid">
+
+      <!-- Coluna 1: proporção geral -->
+      <div class="cg">
+        <div class="divider">Etiqueta de Envio (Pág. 1)</div>
+        <label>Altura no resultado</label>
+        <div class="sr">
+          <input type="range" id="split" min="45" max="88" value="72" style="width:160px"
+                 oninput="sv.textContent=this.value+'%';renderAll()">
+          <span class="sv" id="sv">72%</span>
+        </div>
+        <span class="hn">⬆ mais espaço envio · ⬇ mais espaço produtos</span>
+      </div>
+
+      <!-- Coluna 2: controles pág. 2 -->
+      <div class="cg">
+        <div class="divider">ROMANEIO / Produtos (Pág. 2)</div>
+        <label>Girar imagem</label>
+        <div class="rg">
+          <label><input type="radio" name="rot" value="90"  onchange="renderAll()" checked> 90° →</label>
+          <label><input type="radio" name="rot" value="270" onchange="renderAll()"> 90° ←</label>
+          <label><input type="radio" name="rot" value="180" onchange="renderAll()"> 180°</label>
+          <label><input type="radio" name="rot" value="0"   onchange="renderAll()"> Sem giro</label>
+        </div>
+      </div>
+
+      <!-- Coluna 3: cortar cabeçalho -->
+      <div class="cg">
+        <div class="divider" style="visibility:hidden">_</div>
+        <label>Cortar cabeçalho do ROMANEIO</label>
+        <div class="sr">
+          <input type="range" id="crop" min="0" max="80" value="0" style="width:150px"
+                 oninput="cv.textContent=this.value+'%';renderAll()">
+          <span class="sv" id="cv">0%</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <button class="btn-sm" onclick="autoDetectCropUI()">🔍 Auto-detectar</button>
+          <button class="btn-sm" onclick="document.getElementById('crop').value=0;cv.textContent='0%';renderAll()">↺ Resetar</button>
+        </div>
+        <span class="hn">Deslize até restar só a tabela de produtos</span>
+      </div>
+
+      <!-- Coluna 4: opções + imprimir -->
+      <div class="cg">
+        <div class="divider" style="visibility:hidden">_</div>
+        <label>Opções</label>
+        <label class="ck"><input type="checkbox" id="trim" checked onchange="renderAll()"> Cortar espaço em branco</label>
+        <label class="ck"><input type="checkbox" id="sep"  checked onchange="renderAll()"> Linha divisória</label>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">
+          <button class="btn" onclick="exportTXT()">⬇️ Salvar .txt (impressora)</button>
+          <button class="btn" style="background:#555;font-size:.82rem;padding:7px 16px;" onclick="doPrint()">🖨️ Imprimir via navegador</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Prévia -->
+  <div class="card" id="pvc" style="display:none">
+    <div id="cb" class="cnt-badge"></div>
+    <div id="lc"></div>
+  </div>
+
+</div><!-- /wrap -->
+
+<div id="pc"></div><!-- print container -->
+
+<script>
+"use strict";
+let labels=[];
+
+/* ── upload ─────────────────────────────────────────────────── */
+const dz=document.getElementById('dz'),fi=document.getElementById('fi');
+dz.addEventListener('click',()=>fi.click());
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');if(e.dataTransfer.files[0])go(e.dataTransfer.files[0]);});
+fi.addEventListener('change',e=>{if(e.target.files[0])go(e.target.files[0]);});
+
+function go(f){
+  setSt(`<span class="sp"></span>Lendo "${f.name}"…`);
+  const r=new FileReader();r.onload=e=>run(e.target.result);r.readAsText(f);
+}
+function setSt(h,err=false){const e=document.getElementById('st');e.innerHTML=h;e.className=err?'err':'';}
+
+/* ── ZPL parse ───────────────────────────────────────────────── */
+function parseZPL(txt){
+  const out=[];
+  const re=/~DGR:[^,]*,(\d+),(\d+),:Z64:([^:]+):([0-9A-Fa-f]{4})/g;
+  let m;
+  while((m=re.exec(txt))!==null){
+    out.push({totalBytes:+m[1],bpr:+m[2],z64:m[3].replace(/[\r\n\s]/g,'')});
+  }
+  return out;
+}
+
+/* ── ZLib inflate (nativo Chrome/Edge/Firefox — sem internet) ── */
+async function inflate(u8){
+  const ds=new DecompressionStream('deflate');
+  const w=ds.writable.getWriter(),r=ds.readable.getReader();
+  w.write(u8);w.close();
+  const chunks=[];let tot=0;
+  for(;;){const{done,value}=await r.read();if(done)break;chunks.push(value);tot+=value.length;}
+  const out=new Uint8Array(tot);let off=0;
+  for(const c of chunks){out.set(c,off);off+=c.length;}
+  return out;
+}
+
+/* ── Z64 → Canvas (1 bit GRF) ─────────────────────────────── */
+async function decodeGRF({totalBytes,bpr,z64}){
+  const bin=atob(z64);
+  const comp=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++)comp[i]=bin.charCodeAt(i);
+  const raw=await inflate(comp);
+
+  const W=bpr*8, H=Math.ceil(totalBytes/bpr);
+  const cv=document.createElement('canvas');cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d'),img=ctx.createImageData(W,H);
+  const u32=new Uint32Array(img.data.buffer);
+  u32.fill(0xFFFFFFFF);
+  const lim=Math.min(raw.length,totalBytes);
+  for(let i=0;i<lim;i++){
+    const byte=raw[i],row=Math.floor(i/bpr),cb=(i%bpr)*8;
+    if(row>=H)break;
+    const base=row*W+cb;
+    for(let b=0;b<8;b++)if((byte>>(7-b))&1)u32[base+b]=0xFF000000;
+  }
+  ctx.putImageData(img,0,0);
+  return cv;
+}
+
+/* ── Rotacionar canvas ──────────────────────────────────────── */
+function rotateCanvas(src,deg){
+  if(deg===0)return src;
+  const swap=deg===90||deg===270;
+  const out=document.createElement('canvas');
+  out.width=swap?src.height:src.width;
+  out.height=swap?src.width:src.height;
+  const ctx=out.getContext('2d');
+  ctx.translate(out.width/2,out.height/2);
+  ctx.rotate(deg*Math.PI/180);
+  ctx.drawImage(src,-src.width/2,-src.height/2);
+  return out;
+}
+
+/* ── Trim whitespace em todos os lados ─────────────────────── */
+function trimCanvas(src,pad=8){
+  const ctx=src.getContext('2d');
+  const d=ctx.getImageData(0,0,src.width,src.height).data;
+  let t=src.height,bo=0,le=src.width,ri=0;
+  for(let row=0;row<src.height;row++){
+    const rb=row*src.width*4;
+    for(let col=0;col<src.width;col++){
+      if(d[rb+col*4]<200){
+        if(row<t)t=row;if(row>bo)bo=row;
+        if(col<le)le=col;if(col>ri)ri=col;
+      }
+    }
+  }
+  if(t>bo)return src;
+  t=Math.max(0,t-pad);bo=Math.min(src.height-1,bo+pad);
+  le=Math.max(0,le-pad);ri=Math.min(src.width-1,ri+pad);
+  const W=ri-le+1,H=bo-t+1;
+  const out=document.createElement('canvas');out.width=W;out.height=H;
+  out.getContext('2d').drawImage(src,le,t,W,H,0,0,W,H);
+  return out;
+}
+
+/* ── Auto-detectar linha separadora do cabeçalho (antes de "Produto") ──────
+   Estratégia:
+   1. Calcula densidade de pixels escuros por linha
+   2. Agrupa linhas consecutivas com densidade > 0.18 ("bandas sólidas")
+   3. Pega a ÚLTIMA banda com pico > 0.35 no top 88% — essa é a borda da tabela
+   4. Retorna o início dessa banda (para incluir a linha e o header "Produto")
+*/
+function detectHeaderEnd(canvas){
+  const ctx=canvas.getContext('2d');
+  const {data}=ctx.getImageData(0,0,canvas.width,canvas.height);
+  const W=canvas.width, H=canvas.height;
+  const lim=Math.round(H*0.88);
+
+  // Densidade de pixels escuros por linha
+  const dens=[];
+  for(let r=0;r<lim;r++){
+    let dk=0; const rb=r*W*4;
+    for(let c=0;c<W;c++)if(data[rb+c*4]<128)dk++;
+    dens[r]=dk/W;
+  }
+
+  // Encontra todas as "bandas" (≥2 linhas consecutivas com densidade > 0.18)
+  const bands=[];
+  let bs=-1, bmax=0;
+  for(let r=0;r<lim;r++){
+    if(dens[r]>0.18){
+      if(bs<0){bs=r;bmax=0;}
+      if(dens[r]>bmax)bmax=dens[r];
+    } else if(bs>=0){
+      if(r-bs>=2)bands.push({s:bs,e:r-1,max:bmax});
+      bs=-1;bmax=0;
+    }
+  }
+  if(bs>=0&&lim-bs>=2)bands.push({s:bs,e:lim-1,max:bmax});
+
+  if(!bands.length)return 0;
+
+  // Última banda com pico > 0.35 = borda sólida da tabela de produtos
+  for(let i=bands.length-1;i>=0;i--){
+    if(bands[i].max>0.35)return Math.max(0,bands[i].s-3);
+  }
+  // Fallback: última banda encontrada
+  return Math.max(0,bands[bands.length-1].s-3);
+}
+
+/* ── UI: auto detectar e atualizar slider ──────────────────── */
+function autoDetectCropUI(silent=false){
+  if(!labels.length)return;
+  const lbl=labels[0];
+  if(!lbl.page2){if(!silent)setSt('Só 1 página no arquivo.',true);return;}
+  const rot=+document.querySelector('input[name="rot"]:checked').value;
+  let p2=rotateCanvas(lbl.page2,rot);
+  if(document.getElementById('trim').checked)p2=trimCanvas(p2);
+  const row=detectHeaderEnd(p2);
+  const pct=Math.min(80,Math.round((row/p2.height)*100));
+  const slider=document.getElementById('crop');
+  slider.value=pct;
+  document.getElementById('cv').textContent=pct+'%';
+  renderAll();
+}
+
+/* ── Construir canvas combinado 10×15cm ─────────────────────── */
+function buildCombined(p1,p2,splitR,autoTrim,showSep,rot,cropPct){
+  const W=p1.width,H=p1.height;
+  const h1=Math.round(H*splitR),h2=H-h1;
+  const out=document.createElement('canvas');out.width=W;out.height=H;
+  const ctx=out.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+
+  if(!p2){ctx.drawImage(p1,0,0);return out;}
+
+  /* Pág. 1 → faixa superior */
+  ctx.drawImage(p1,0,0,W,H, 0,0,W,h1);
+
+  /* Pág. 2 → rotaciona → trim → corta cabeçalho */
+  let p2p=rotateCanvas(p2,rot);
+  if(autoTrim)p2p=trimCanvas(p2p);
+
+  const cropY=Math.round(p2p.height*cropPct/100);
+  const srcH=p2p.height-cropY;
+  if(srcH<=0){if(showSep){ctx.strokeStyle='#000';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,h1);ctx.lineTo(W,h1);ctx.stroke();}return out;}
+
+  /* Escala proporcional para caber em h2 */
+  const scaleX=W/p2p.width;
+  const scaledH=Math.round(srcH*scaleX);
+  if(scaledH<=h2){
+    ctx.drawImage(p2p,0,cropY,p2p.width,srcH, 0,h1,W,scaledH);
+  }else{
+    ctx.drawImage(p2p,0,cropY,p2p.width,srcH, 0,h1,W,h2);
+  }
+
+  if(showSep){
+    ctx.strokeStyle='#000';ctx.lineWidth=3;
+    ctx.beginPath();ctx.moveTo(0,h1);ctx.lineTo(W,h1);ctx.stroke();
+  }
+  return out;
+}
+
+/* ── Processar arquivo ───────────────────────────────────────── */
+async function run(txt){
+  try{
+    setSt('<span class="sp"></span>Identificando páginas…');
+    const pages=parseZPL(txt);
+    if(!pages.length){setSt('Nenhum bloco ZPL encontrado. Verifique o arquivo.',true);return;}
+    setSt(`<span class="sp"></span>${pages.length} página(s). Decodificando…`);
+    const cvs=await Promise.all(pages.map(p=>decodeGRF(p)));
+    labels=[];
+    for(let i=0;i<cvs.length;i+=2)labels.push({page1:cvs[i],page2:cvs[i+1]||null});
+    document.getElementById('cc').style.display='block';
+    document.getElementById('pvc').style.display='block';
+    document.getElementById('cb').textContent=`✅  ${labels.length} etiqueta${labels.length>1?'s':''} carregada${labels.length>1?'s':''}`;
+    // Auto-detectar e aplicar corte do cabeçalho na primeira carga
+    autoDetectCropUI(true);
+    setSt(`✅ Pronto! Ajuste os controles se necessário e imprima.`);
+  }catch(err){setSt('Erro: '+err.message,true);console.error(err);}
+}
+
+/* ── Renderizar todas as prévias ─────────────────────────────── */
+function renderAll(){
+  if(!labels.length)return;
+  const splitR=+document.getElementById('split').value/100;
+  const autoTrim=document.getElementById('trim').checked;
+  const showSep=document.getElementById('sep').checked;
+  const rot=+document.querySelector('input[name="rot"]:checked').value;
+  const cropPct=+document.getElementById('crop').value;
+
+  const lc=document.getElementById('lc'),pc=document.getElementById('pc');
+  lc.innerHTML='';pc.innerHTML='';
+
+  labels.forEach((lbl,idx)=>{
+    const combined=buildCombined(lbl.page1,lbl.page2,splitR,autoTrim,showSep,rot,cropPct);
+
+    /* — Prévia na tela — */
+    const block=document.createElement('div');block.className='lbl-block';
+    if(labels.length>1){const n=document.createElement('div');n.className='lbl-num';n.textContent=`Etiqueta ${idx+1}`;block.appendChild(n);}
+
+    const grid=document.createElement('div');grid.className='pv-wrap';
+
+    /* Esquerda: resultado */
+    const lw=document.createElement('div');
+    const st1=document.createElement('div');st1.className='sec-t';st1.textContent='Resultado 10×15cm';lw.appendChild(st1);
+    const fr=document.createElement('div');fr.className='lbl-frame';
+    const pvc=document.createElement('canvas');pvc.width=combined.width;pvc.height=combined.height;
+    pvc.style.cssText='width:233px;height:350px;display:block;';
+    pvc.getContext('2d').drawImage(combined,0,0);
+    fr.appendChild(pvc);lw.appendChild(fr);
+    const si=document.createElement('div');si.className='sep-info';
+    si.textContent=`Pág.1: ${Math.round(splitR*100)}% · Pág.2: ${Math.round((1-splitR)*100)}%`;
+    lw.appendChild(si);grid.appendChild(lw);
+
+    /* Direita: pág. 2 rotacionada + cortada (prévia) */
+    if(lbl.page2){
+      const rw=document.createElement('div');rw.className='origs';
+
+      /* Pág 1 miniatura */
+      const t1=document.createElement('div');t1.className='sec-t';t1.textContent='Pág. 1 — original';rw.appendChild(t1);
+      const c1=document.createElement('canvas');c1.width=lbl.page1.width;c1.height=lbl.page1.height;
+      c1.getContext('2d').drawImage(lbl.page1,0,0);rw.appendChild(c1);
+
+      /* Pág 2 processada */
+      const t2=document.createElement('div');t2.className='sec-t';t2.textContent='Pág. 2 — após rotação + corte';rw.appendChild(t2);
+      let p2p=rotateCanvas(lbl.page2,rot);
+      if(autoTrim)p2p=trimCanvas(p2p);
+      const cropY=Math.round(p2p.height*cropPct/100);
+      const srcH=Math.max(1,p2p.height-cropY);
+      const c2=document.createElement('canvas');c2.width=p2p.width;c2.height=srcH;
+      c2.getContext('2d').drawImage(p2p,0,cropY,p2p.width,srcH,0,0,p2p.width,srcH);
+      rw.appendChild(c2);
+
+      grid.appendChild(rw);
+    }
+
+    block.appendChild(grid);lc.appendChild(block);
+
+    /* — Área de impressão — */
+    const pd=document.createElement('div');pd.className='pl';
+    const pi=document.createElement('img');pi.src=combined.toDataURL('image/png');
+    pd.appendChild(pi);pc.appendChild(pd);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EXPORTAÇÃO ZPL — recria o .txt para impressora térmica
+   ══════════════════════════════════════════════════════════════ */
+
+/* Canvas → bytes GRF (1 bit por pixel, MSB primeiro) */
+function canvasToGRF(canvas){
+  const ctx=canvas.getContext('2d');
+  const {data}=ctx.getImageData(0,0,canvas.width,canvas.height);
+  const W=canvas.width, H=canvas.height;
+  const bpr=Math.ceil(W/8);
+  const grf=new Uint8Array(bpr*H); // já zerado (pixel branco = 0)
+  for(let row=0;row<H;row++){
+    for(let col=0;col<W;col++){
+      if(data[(row*W+col)*4]<128){ // pixel preto
+        const bi=row*bpr+Math.floor(col/8);
+        grf[bi]|=(1<<(7-(col%8)));
+      }
+    }
+  }
+  return{grf,bpr,totalBytes:bpr*H};
+}
+
+/* ZLib deflate — API nativa Chrome/Edge/Firefox */
+async function zlibDeflate(u8){
+  const cs=new CompressionStream('deflate');
+  const w=cs.writable.getWriter(),r=cs.readable.getReader();
+  w.write(u8);w.close();
+  const chunks=[];let tot=0;
+  for(;;){const{done,value}=await r.read();if(done)break;chunks.push(value);tot+=value.length;}
+  const out=new Uint8Array(tot);let off=0;
+  for(const c of chunks){out.set(c,off);off+=c.length;}
+  return out;
+}
+
+/* CRC-16/XMODEM — ZPL Z64 calcula sobre a STRING Base64, init=0x0000 */
+function crc16(str){
+  let crc=0x0000;
+  for(let i=0;i<str.length;i++){
+    crc^=str.charCodeAt(i)<<8;
+    for(let j=0;j<8;j++)
+      crc=((crc&0x8000)?((crc<<1)^0x1021):(crc<<1))&0xFFFF;
+  }
+  return crc;
+}
+
+/* Uint8Array → Base64 (chunks para evitar stack overflow em arrays grandes) */
+function u8ToB64(u8){
+  const CHUNK=8192;let s='';
+  for(let i=0;i<u8.length;i+=CHUNK)
+    s+=String.fromCharCode.apply(null,u8.subarray(i,Math.min(i+CHUNK,u8.length)));
+  return btoa(s);
+}
+
+/* Canvas combinado → bloco ZPL pronto para impressora */
+async function canvasToZPLBlock(canvas){
+  const{grf,bpr,totalBytes}=canvasToGRF(canvas);
+  const compressed=await zlibDeflate(grf);
+  const b64=u8ToB64(compressed);
+  // CRC-16/XMODEM calculado sobre a STRING Base64 (igual ao formato Shopee)
+  const checksum=crc16(b64).toString(16).toUpperCase().padStart(4,'0');
+  // Reconstrói o mesmo formato do arquivo original da Shopee
+  return `~DGR:DEMO.GRF,${totalBytes},${bpr},:Z64:${b64}:${checksum}^XA^MMT,Y^PON^MNY^FO0,0^XGR:DEMO.GRF,1,1^FS^PQ1,0,0,N^XZ^XA^IDR:DEMO.GRF^FS^XZ\n`;
+}
+
+/* Download de texto como arquivo */
+function downloadFile(content,filename){
+  const blob=new Blob([content],{type:'text/plain'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=filename;a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+/* Exportar todas as etiquetas como .txt ZPL */
+async function exportTXT(){
+  if(!labels.length)return;
+  const splitR=+document.getElementById('split').value/100;
+  const autoTrim=document.getElementById('trim').checked;
+  const showSep=document.getElementById('sep').checked;
+  const rot=+document.querySelector('input[name="rot"]:checked').value;
+  const cropPct=+document.getElementById('crop').value;
+
+  setSt('<span class="sp"></span>Gerando arquivo .txt ZPL…');
+  try{
+    let txt='';
+    for(let i=0;i<labels.length;i++){
+      const lbl=labels[i];
+      const combined=buildCombined(lbl.page1,lbl.page2,splitR,autoTrim,showSep,rot,cropPct);
+      setSt(`<span class="sp"></span>Codificando etiqueta ${i+1}/${labels.length}…`);
+      txt+=await canvasToZPLBlock(combined);
+    }
+    const ts=new Date().toISOString().slice(0,16).replace(/[T:]/g,'-');
+    downloadFile(txt,`etiquetas_${ts}.txt`);
+    setSt(`✅ Arquivo gerado! ${labels.length} etiqueta(s) no mesmo formato ZPL da Shopee.`);
+  }catch(err){
+    setSt('Erro ao gerar TXT: '+err.message,true);
+    console.error(err);
+  }
+}
+
+/* ── Imprimir ─────────────────────────────────────────────────── */
+function doPrint(){
+  if(!labels.length)return;
+  document.getElementById('pc').style.display='block';
+  setTimeout(()=>{window.print();setTimeout(()=>document.getElementById('pc').style.display='none',2000);},120);
+}
+</script>
+</body>
+</html>
